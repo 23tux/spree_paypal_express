@@ -1,7 +1,8 @@
 Spree::CheckoutHelper.module_eval do
 
-  def checkout_states
-    %w(address delivery payment confirm complete)
-  end
+  # we redefined this in our own application
+  # def checkout_states
+  #   %w(address delivery payment confirm complete)
+  # end
 
 end
