@@ -80,7 +80,7 @@ module Spree
           ship_address = @ppx_details.address
           order_ship_address = Spree::Address.new :firstname  => @ppx_details.params["first_name"],
                                                   :lastname   => @ppx_details.params["last_name"],
-                                                  :address1   => ship_address["address1"],
+                                                  :address1   => "#{ship_address["address1"]} #{ship_address["street_number"]}",
                                                   :address2   => ship_address["address2"],
                                                   :city       => ship_address["city"],
                                                   :country    => Spree::Country.find_by_iso(ship_address["country"]),
@@ -380,7 +380,7 @@ module Spree
           :address_override => true,
           :address => {
             :name       => "#{order.ship_address.firstname} #{order.ship_address.lastname}",
-            :address1   => order.ship_address.address1,
+            :address1   => "#{order.ship_address.address1} #{order.ship_address.street_number}",
             :address2   => order.ship_address.address2,
             :city       => order.ship_address.city,
             :state      => order.ship_address.state.nil? ? order.ship_address.state_name.to_s : order.ship_address.state.abbr,
@@ -406,7 +406,7 @@ module Spree
         opts[:address] = {
           :name => order.bill_address.full_name,
           :zip => order.bill_address.zipcode,
-          :address1 => order.bill_address.address1,
+          :address1 => "#{order.bill_address.address1} #{order.bill_address.street_number}",
           :address2 => order.bill_address.address2,
           :city => order.bill_address.city,
           :phone => order.bill_address.phone,
